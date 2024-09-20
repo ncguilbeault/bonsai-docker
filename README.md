@@ -65,5 +65,5 @@ while IFS= read -r file; do zip -yur archive.zip "$file"; done < /path/to/instal
 Full command:
 
 ```
-docker run --rm --runtime=nvidia -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/video0:/dev/video0 --device=/dev/dri:/dev/dri -v /home/nicholas/movenet-example:/movenet-example -e WORKDIR=/movenet-example --gpus all bonsai-cuda
+docker run --rm --runtime=nvidia -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/video0:/dev/video0 --device=/dev/dri:/dev/dri -v /home/nicholas/movenet-example:/movenet-example -e WORKDIR=/movenet-example --gpus all bonsai-tensorflow
 ```
