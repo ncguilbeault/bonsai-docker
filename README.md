@@ -1,4 +1,4 @@
-# bonsai-linux-docker-base
+# bonsai-docker
 
 Recommended to install docker rootless -> see here (https://docs.docker.com/engine/security/rootless/)
 
