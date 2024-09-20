@@ -2,11 +2,12 @@
 
 Recommended to install docker rootless -> see here (https://docs.docker.com/engine/security/rootless/)
 
-To build image:
+To build images, run the following:
 
 ```
 docker build --tag "bonsai-base" .
 ```
+Building each docker image built requires 
 
 The docker image does not by default have access to the host system, meaning any paths must be specified relative to the container. When launching the bonsai-base container, it will always look for a `.bonsai` folder inside of the working directory. The default working directory is set to `/bonsai`. Thus, the container will launch inside of the `/bonsai` folder, which will contain a bonsai environment inside of the `.bonsai` folder. You can change the working directory of the application by specifying the `WORKDIR` environment variable like so:
 
@@ -66,4 +67,10 @@ Full command:
 
 ```
 docker run --rm --runtime=nvidia -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/video0:/dev/video0 --device=/dev/dri:/dev/dri -v /home/nicholas/movenet-example:/movenet-example -e WORKDIR=/movenet-example --gpus all bonsai-tensorflow
+```
+
+It is possible to run bonsai on a Mac using the bonsai-base docker image. Keep in mind, this will expose the Bonsai editor behind an X11 server. To do this, you need to install XQuartz, mac's X11 server. Once installed, you should check that the X11 server is functioning by launching xclock in the terminal. If the window appears, the next step to configure XQuartz to allow connections from anywhere. Go to Settings > Security > Allow connections from network clients. Then, in your terminal, run `xhost +`. Finally, you can modify the docker run command using:
+
+```
+docker run --network host -e DISPLAY=host.docker.internal:0 bonsai-base
 ```
