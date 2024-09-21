@@ -6,8 +6,10 @@ This repo contains docker files for building containerized linux environments th
 
 Some familiarity with [docker](https://www.docker.com/) is important. To run the docker containers, you must have at least [docker engine](https://docs.docker.com/engine/) installed. It is recommended to install docker in [rootless mode](https://docs.docker.com/engine/security/rootless/). Your docker engine must also be set up to run linux OS, as these docker containers are designed to run on linux. If you are new to docker, it is recommended to read the [get started page](https://docs.docker.com/get-started/docker-overview/).
 
-You can run the docker images by pulling the images directly from docker hub using the following:
-
+You can pull the docker images directly from docker hub and run them without building using the following:
+```
+docker pull ncguilbeault/bonsai-docker:bonsai-base
+```
 
 ## Build
 
