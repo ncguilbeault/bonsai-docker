@@ -9,11 +9,12 @@ Some familiarity with [docker](https://www.docker.com/) is important. To run the
 You can pull the docker images directly from docker hub and run them without building using the following:
 ```
 docker pull ncguilbeault/bonsai-docker:bonsai-base
+docker tag ncguilbeault/bonsai-docker:bonsai-base bonsai-base
 ```
 
 ## Build
 
-To build, you should run the following:
+To build the containers, you should run the following:
 
 ```
 cd /path/to/bonsai-docker
@@ -106,7 +107,7 @@ It is possible to attach devices that are connected to your host OS to your dock
 docker run --device=/dev/video0:/dev/video0 bonsai-base
 ```
 
-### OpenGL
+### OpenGL Errors
 
 Sometimes, you may encounter errors regarding openGL/MESA running bonsai in the docker container. For example, you may see an error message like this: "MESA: error: Failed to query drm device." To fix this, you can also attach the dri device to the container like so:
 
@@ -119,6 +120,10 @@ docker run --device=/dev/dri:/dev/dri bonsai-vision
 ```
 docker run --rm --runtime=nvidia -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/video0:/dev/video0 --device=/dev/dri:/dev/dri -v /path/to/tensorflow-example:/tensorflow-example -e WORKDIR=/tensorflow-example --gpus all bonsai-tensorflow
 ```
+
+### Run versus Start
+
+By default, any time you do `docker run`, this creates a new container, which will cause a continual increase in memory. You can run `docker container prune` to remove unused containers or you can reuse an existing container by running `docker start` instead of `docker run`. It may also be useful to give your container a desired name when you create it, such as `docker run --name bonsai bonsai-base`, and then on subsequent usage do `docker start bonsai`.
 
 ## Instructions for macOS
 
